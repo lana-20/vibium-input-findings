@@ -3,6 +3,8 @@ Split out of #488, #507 covers `input[type=number]`. Sweeping all 22 HTML input 
 
 Nothing in #507 is wrong — its `number` report reproduces as written on Chrome at the default width, and at any width narrow enough for the value to reach the click point. It stops reproducing once the field is wide enough that the center of the box falls past the end of the text: at `width:400px` the same commands append correctly (`123456789099`) on both engines. That is this issue's own mechanism, not a contradiction of it, and it is why every repro below pins a width. This is the same defect measured across the whole type surface, and the patch at the end fixes both, so #507 can close with it.
 
+Every table in this report is also rendered as a standalone page — **[Type Append Measurements](https://lana-20.github.io/vibium-input-findings/type-append/)** — next to the scripts that produced it and their raw output.
+
 ## Repro (~1s, no network)
 
 Build `main` first — `make build-go`. The released v26.8.21 (2026-08-21) predates `7f88254` and contains no `caretToEnd` at all, so on that build every text field is affected and these seven do not stand out. Note that a `main` build still reports `vibium v26.8.21`, so the version string will not tell the two apart. Everything below is Chrome. For the other engine run `vibium stop` first and then add `--engine firefox` to each command — with a browser already running the flag is refused (`chrome is already running; requested firefox`).

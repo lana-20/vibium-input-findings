@@ -3,6 +3,8 @@
 
 The cause is that `buildSetValueScript` writes through the native `value` setter and then returns `'ok'` without ever reading the value back. Assigning through that setter runs the type's [value sanitization algorithm](https://html.spec.whatwg.org/multipage/input.html#value-sanitization-algorithm), which for these types discards a string it cannot parse — silently, throwing nothing.
 
+Every table in this report is also rendered as a standalone page — **[Fill Acceptance Measurements](https://lana-20.github.io/vibium-input-findings/fill-acceptance/)** — next to the scripts that produced it and their raw output.
+
 ## Repro (~5s, no network)
 
 Build `main` first — `make build-go`. A `main` build still reports `vibium v26.8.21`, so the version string will not tell it apart from the release.
