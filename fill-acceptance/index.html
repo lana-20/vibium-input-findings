@@ -92,6 +92,7 @@
     color: var(--accent);
     margin: 0 0 10px;
   }
+  .eyebrow a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   h1 {
     font-size: clamp(28px, 4.4vw, 40px);
     line-height: 1.12;
@@ -253,7 +254,7 @@
 </style>
 <div class="wrap">
   <header class="masthead">
-    <p class="eyebrow">Measured evidence · companion to the report</p>
+    <p class="eyebrow">Measured evidence · <a href="https://github.com/VibiumDev/vibium/issues/530">issue #530</a></p>
     <h1>Fill Acceptance Measurements</h1>
     <p class="lede"><code>vibium fill</code> reports success for a value the field cannot hold. The write goes through
     the native value setter, which throws nothing — so the only question is whether the tool notices the value did not

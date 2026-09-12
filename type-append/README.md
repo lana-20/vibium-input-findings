@@ -1,4 +1,7 @@
 # `type` breaks its documented append contract on seven input types, not just `number`
+
+> Filed upstream as **[#529](https://github.com/VibiumDev/vibium/issues/529)**.
+
 Split out of #488, #507 covers `input[type=number]`. Sweeping all 22 HTML input types shows `type` breaks its documented append contract on seven of them on Chrome — five on Firefox, which renders `month` and `week` as ordinary text inputs where the append works — and that they split into two groups with different causes, only one of which is the #488 mechanism. For `number` and `email` the focusing click is provably the cause: remove it and the corruption disappears entirely. For the five segmented date types there is no caret to misplace in the first place, and they misbehave with or without a click.
 
 Nothing in #507 is wrong — its `number` report reproduces as written on Chrome at the default width, and at any width narrow enough for the value to reach the click point. It stops reproducing once the field is wide enough that the center of the box falls past the end of the text: at `width:400px` the same commands append correctly (`123456789099`) on both engines. That is this issue's own mechanism, not a contradiction of it, and it is why every repro below pins a width. This is the same defect measured across the whole type surface, and the patch at the end fixes both, so #507 can close with it.

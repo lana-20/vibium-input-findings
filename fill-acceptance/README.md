@@ -1,4 +1,7 @@
 # `fill` reports success for a value the field cannot hold, and leaves the field empty
+
+> Filed upstream as **[#530](https://github.com/VibiumDev/vibium/issues/530)**.
+
 `vibium fill "#d" "not-a-date"` prints `Filled "not-a-date" into #d`, exits 0, and leaves the field empty. The same holds for `fill "#n" "abc"` on a number input, and for the whole date family, `color` and `range`. An agent filling a form has no way to notice: the command succeeded, and the next step submits an empty field.
 
 The cause is that `buildSetValueScript` writes through the native `value` setter and then returns `'ok'` without ever reading the value back. Assigning through that setter runs the type's [value sanitization algorithm](https://html.spec.whatwg.org/multipage/input.html#value-sanitization-algorithm), which for these types discards a string it cannot parse — silently, throwing nothing.

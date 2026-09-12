@@ -6,6 +6,8 @@ back from a live field, not inferred from source.
 
 **Rendered tables: https://lana-20.github.io/vibium-input-findings/**
 
+Filed upstream as [#529](https://github.com/VibiumDev/vibium/issues/529) (`type`) and [#530](https://github.com/VibiumDev/vibium/issues/530) (`fill`).
+
 | | |
 |---|---|
 | **[type-append](https://lana-20.github.io/vibium-input-findings/type-append/)** | `type` breaks its documented append contract on seven input types — spliced mid-value on `number` and `email`, a segment overwritten on the five date types |
