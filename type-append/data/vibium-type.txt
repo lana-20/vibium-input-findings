@@ -1,0 +1,36 @@
+stock|chrome|text|123456789099|
+stock|chrome|password|123456789099|
+stock|chrome|number|123456997890|
+stock|chrome|email|abcdefg99hij|
+stock|chrome|date|2020-09-09|
+stock|chrome|time|09:09|
+stock|chrome|month|2020-09|
+stock|chrome|week|0009-W09|
+stock|chrome|datetime-local|2020-09-09T10:30|
+stock|firefox|text|123456789099|
+stock|firefox|password|123456789099|
+stock|firefox|number|123456997890|
+stock|firefox|email|abcdef99ghij|
+stock|firefox|date|2020-01-02|
+stock|firefox|time|10:30|
+stock|firefox|month|2020-0199|
+stock|firefox|week|2020-W0299|
+stock|firefox|datetime-local|2020-01-02T10:30|
+patched|chrome|text|123456789099|
+patched|chrome|password|123456789099|
+patched|chrome|number|123456789099|
+patched|chrome|email|abcdefghij99|
+patched|chrome|date|2020-01-02|Error: failed to type: type: input[type=date] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|chrome|time|10:30|Error: failed to type: type: input[type=time] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|chrome|month|2020-01|Error: failed to type: type: input[type=month] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|chrome|week|2020-W02|Error: failed to type: type: input[type=week] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|chrome|datetime-local|2020-01-02T10:30|Error: failed to type: type: input[type=datetime-local] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|firefox|text|123456789099|
+patched|firefox|password|123456789099|
+patched|firefox|number|123456789099|
+patched|firefox|email|abcdefghij99|
+patched|firefox|date|2020-01-02|Error: failed to type: type: input[type=date] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|firefox|time|10:30|Error: failed to type: type: input[type=time] holds segments rather than text, so there is nothing to append to; use fill to set it
+patched|firefox|month|2020-0199|
+patched|firefox|week|2020-W0299|
+patched|firefox|datetime-local|2020-01-02T10:30|Error: failed to type: type: input[type=datetime-local] holds segments rather than text, so there is nothing to append to; use fill to set it

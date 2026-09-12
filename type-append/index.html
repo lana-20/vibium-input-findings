@@ -1,0 +1,418 @@
+<title>Type Append Measurements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap">
+<style>
+  :root {
+    --ground: #f6f7f9;
+    --panel: #ffffff;
+    --panel-alt: #f0f2f6;
+    --ink: #151a21;
+    --ink-soft: #4d5866;
+    --ink-faint: #78838f;
+    --rule: #dde2e9;
+    --rule-strong: #c3ccd6;
+    --accent: #2b6b7a;
+    --accent-soft: #e3eff1;
+    --fault: #9a4b16;
+    --fault-soft: #f7e9de;
+    --good: #1f6a47;
+    --good-soft: #e0efe7;
+    --neutral: #46577a;
+    --neutral-soft: #e6eaf3;
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  :root:not([data-theme="light"]) {
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #0f1319;
+      --panel: #161c24;
+      --panel-alt: #1c232d;
+      --ink: #e6ebf1;
+      --ink-soft: #a3afbd;
+      --ink-faint: #7b8794;
+      --rule: #27303b;
+      --rule-strong: #3a4553;
+      --accent: #6fb3c2;
+      --accent-soft: #14303a;
+      --fault: #e0a06a;
+      --fault-soft: #33241a;
+      --good: #71c69c;
+      --good-soft: #14291f;
+      --neutral: #9db0d8;
+      --neutral-soft: #1c2333;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #0f1319;
+    --panel: #161c24;
+    --panel-alt: #1c232d;
+    --ink: #e6ebf1;
+    --ink-soft: #a3afbd;
+    --ink-faint: #7b8794;
+    --rule: #27303b;
+    --rule-strong: #3a4553;
+    --accent: #6fb3c2;
+    --accent-soft: #14303a;
+    --fault: #e0a06a;
+    --fault-soft: #33241a;
+    --good: #71c69c;
+    --good-soft: #14291f;
+    --neutral: #9db0d8;
+    --neutral-soft: #1c2333;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 48px 72px;
+  }
+
+  header.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: 14px 0 0;
+  }
+
+  .thesis {
+    margin: 14px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 72ch;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+  }
+  .env {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 28px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .env div { padding-block: 3px; }
+  .env b { color: var(--ink-soft); font-weight: 500; }
+
+  section.issue { margin-top: 56px; }
+  .issue-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  h2 code { font-family: var(--mono); font-size: 0.94em; font-weight: 600; }
+  .issue-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+  .issue-note {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    max-width: 70ch;
+    margin: 10px 0 0;
+  }
+
+  .scroller {
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--panel);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 880px; }
+  caption { text-align: left; padding: 12px 14px; font-size: 12.5px; color: var(--ink-faint); border-bottom: 1px solid var(--rule); }
+  th, td { text-align: left; padding: 9px 14px; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  thead th {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    background: var(--panel-alt);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+  thead th.ours { color: var(--accent); }
+  .th-eng { font-weight: 400; letter-spacing: 0.04em; opacity: 0.7; text-transform: none; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.control td { background: var(--panel-alt); }
+  td.k { font-family: var(--mono); font-weight: 500; white-space: nowrap; }
+  td.k .seed { display: block; font-weight: 400; font-size: 11.5px; color: var(--ink-faint); }
+  .val {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+  }
+  .engine {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  .chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  .c-good { background: var(--good-soft); color: var(--good); }
+  .c-fault { background: var(--fault-soft); color: var(--fault); }
+  .c-neutral { background: var(--neutral-soft); color: var(--neutral); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .legend span.chip { margin: 0 6px 0 0; }
+  .legend-note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 78ch;
+    border-left: 2px solid var(--rule-strong);
+    padding-left: 12px;
+  }
+  .legend-note .chip { margin: 0 2px; }
+
+  .reading { margin-top: 22px; display: grid; gap: 14px; }
+  .reading p { margin: 0; max-width: 72ch; }
+  .reading b { font-weight: 600; }
+  .reading code, p code, li code { font-family: var(--mono); font-size: 0.9em; background: var(--panel-alt); padding: 1px 4px; border-radius: 3px; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-faint);
+    max-width: 72ch;
+  }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 560px) {
+    .wrap { padding-block: 32px 52px; }
+  }
+</style>
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Measured evidence · companion to the report</p>
+    <h1>Type Append Measurements</h1>
+    <p class="lede"><code>vibium type</code> and <code>press</code> are documented as appending to a field's existing
+    value. On seven input types they do not. Every value on this page was read back from a live field, not inferred
+    from source.</p>
+    <div class="env">
+      <div><b>upstream</b> dd48732 · also reproduced at e63bb73</div>
+      <div><b>chrome</b> 152.0.7977.54</div>
+      <div><b>firefox</b> 155.0</div>
+      <div><b>playwright</b> 1.63.0</div>
+      <div><b>selenium</b> 4.49.0 (BiDi on)</div>
+    </div>
+  </header>
+
+  <section class="issue">
+    <p class="issue-note">Each field is seeded, then <code>type "99"</code> appends to it. Fields are pinned to
+    <code>width:100px</code> because the splice index is the character nearest the center of the box — at
+    <code>width:400px</code> the center falls past the end of the text and the same commands append correctly on both
+    engines. Vibium ran on Chrome and Firefox; Playwright and Selenium on Chrome only, driving the same Chrome binary,
+    because Playwright cannot launch a stock Firefox — it needs its own patched build.</p>
+
+    <div class="scroller">
+      <table>
+        <caption>Value after appending <code>99</code>. Four result columns, three tools: Vibium appears twice, stock and patched. Every chip is the <b>Chrome</b> verdict; where
+        Firefox differs it is named in the line beneath.</caption>
+        <thead>
+          <tr>
+            <th>input type</th>
+            <th class="ours">Vibium stock</th>
+            <th class="ours">Vibium + patch</th>
+            <th>Playwright <span class="th-eng">chrome</span></th>
+            <th>Selenium <span class="th-eng">chrome</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="control">
+            <td class="k">text<span class="seed">1234567890</span></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">991234567890</div></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+          </tr>
+          <tr class="control">
+            <td class="k">password<span class="seed">1234567890</span></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">991234567890</div></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+          </tr>
+          <tr>
+            <td class="k">number<span class="seed">1234567890</span></td>
+            <td><span class="chip c-fault">spliced</span><div class="val">123456997890</div></td>
+            <td><span class="chip c-good">appended</span><div class="val">123456789099</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">991234567890</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">991234567890</div></td>
+          </tr>
+          <tr>
+            <td class="k">email<span class="seed">abcdefghij</span></td>
+            <td><span class="chip c-fault">spliced</span><div class="val">abcdefg99hij<span class="engine">ff · abcdef99ghij</span></div></td>
+            <td><span class="chip c-good">appended</span><div class="val">abcdefghij99</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">99abcdefghij</div></td>
+            <td><span class="chip c-neutral">prepended</span><div class="val">99abcdefghij</div></td>
+          </tr>
+          <tr>
+            <td class="k">date<span class="seed">2020-01-02</span></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09<span class="engine">ff · key ignored, 2020-01-02</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1, value intact</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09</div></td>
+          </tr>
+          <tr>
+            <td class="k">time<span class="seed">10:30</span></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">09:09<span class="engine">ff · key ignored, 10:30</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1, value intact</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">09:09</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">09:09</div></td>
+          </tr>
+          <tr>
+            <td class="k">month<span class="seed">2020-01</span></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09<span class="engine">ff · appended, 2020-0199</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1, value intact<span class="engine">ff · appended, 2020-0199</span></div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09</div></td>
+          </tr>
+          <tr>
+            <td class="k">week<span class="seed">2020-W02</span></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">0009-W09<span class="engine">ff · appended, 2020-W0299</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1, value intact<span class="engine">ff · appended, 2020-W0299</span></div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">0009-W09</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">0009-W09</div></td>
+          </tr>
+          <tr>
+            <td class="k">datetime-local<span class="seed">2020-01-02T10:30</span></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09T10:30<span class="engine">ff · key ignored</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1, value intact</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09T10:30</div></td>
+            <td><span class="chip c-fault">segment overwritten</span><div class="val">2020-09-09T10:30</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <div><span class="chip c-good">appended</span>text lands at the end — the documented contract</div>
+      <div><span class="chip c-fault">spliced</span>text inserted mid-value, exit 0</div>
+      <div><span class="chip c-fault">segment overwritten</span>a date/time segment replaced, exit 0</div>
+      <div><span class="chip c-good">refused</span>fails loudly, value left intact</div>
+      <div><span class="chip c-neutral">prepended</span>lands at offset 0, nothing lost</div>
+    </div>
+    <p class="legend-note">The colors track <b>data loss, not contract</b>. <span class="chip c-neutral">prepended</span>
+    is positional: every character seeded is still there, just not where Vibium's docs promise — gray even though it
+    fails the append contract, and for Playwright and Selenium it fails no contract at all. The two red states destroy
+    what was in the field. <span class="chip c-fault">spliced</span> at least looks wrong: <code>123456997890</code> is
+    visibly mangled. <span class="chip c-fault">segment overwritten</span> is the more dangerous one — a segmented date
+    input has no string to append to, so each keystroke <em>replaces</em> the segment holding focus, and
+    <code>2020-01-02</code> becomes <code>2020-09-09</code>: a perfectly valid date that passes every check downstream,
+    silently not the one you had. Which segment is hit depends on where the focusing click landed, which is why the same
+    <code>press 5</code> gives <code>0005-01-02</code> at Chrome's default width and <code>2020-05-02</code> at
+    <code>width:100px</code>.</p>
+
+    <div class="reading">
+      <p><b>Shaded rows are controls.</b> They are the reason the rest of the table can be read: Selenium appends on
+      <code>text</code> and Playwright does not, which is the WebDriver caret rule showing up in exactly one of the two.</p>
+      <p><b>No tool here appends on <code>number</code> or <code>email</code>.</b> Selenium lands at offset 0 just as
+      Playwright does — identical at 60px, 100px and 400px, so it is a caret at the front, not a click-point splice.
+      Measured through Selenium, <code>setSelectionRange</code> on a number input throws <code>InvalidStateError</code>
+      and <code>selectionStart</code> reads <code>null</code>, which is the same limitation this report is about. The
+      patch would make Vibium the only one of the three tools that appends.</p>
+      <p><b>Prepending is not a bug for Playwright or Selenium.</b> Neither documents <code>type</code> as appending;
+      Vibium does, in three places — <code>element.ts:109</code>, <code>Element.java:58</code> and
+      <code>SKILL.md:134</code>. That is what makes the same landing position a contract violation here and ordinary
+      behavior there.</p>
+      <p><b>And the comparison cuts both ways.</b> On the five segmented types the patch makes Vibium the only one of
+      the four that <em>refuses to write at all</em> — Playwright and Selenium both overwrite a segment and report
+      success, exactly as stock Vibium does. The case for refusing anyway is that they do not promise to append and
+      Vibium does, and that a valid-looking wrong date is worse than a failure; but that is a judgment, and the two
+      halves of the patch are independent if parity is weighed differently.</p>
+      <p><b>Firefox renders <code>month</code> and <code>week</code> as plain text inputs</b> — <code>el.type</code>
+      reports <code>text</code> — so they append correctly there and the patch correctly leaves them alone, exiting 0
+      rather than refusing.</p>
+      <p><b>Blast radius.</b> Re-running a 24-element × 2-width × 2-action sweep against stock and patched and diffing
+      every cell: <b>16 of 96 change on Chrome, 10 on Firefox, and nothing else moves</b> — no <code>color</code>,
+      <code>range</code>, <code>checkbox</code>, <code>file</code> or <code>button</code> cell shifts. Firefox changes
+      in six fewer cells because <code>month</code> and <code>week</code> are text inputs there (four cells) and its
+      default-width <code>number</code> box is wide enough that the value never reaches the click point (the other two).</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Why these two types and not the whole list: <code>FillableInputTypesJS</code>
+    (<code>actionability.go:179</code>) is the one place Vibium models input types, and it answers a single question —
+    may <code>fill</code> set this value. <code>number</code> and <code>email</code> sit in that list beside
+    <code>text</code> yet cannot carry a caret, so nothing in the codebase can tell them apart. The same one-boolean
+    model is why <code>fill</code> has a matching defect of its own.</p>
+    <p>Patch: 3 files, +214/−19; applies clean at <code>dd48732</code> and at <code>e63bb73</code>. The swap it uses is
+    observable in exactly one way — a <code>MutationObserver</code> on attributes sees <code>type, type</code> where
+    stock sees nothing. Events fired, <code>min</code>/<code>max</code>/<code>step</code> and validity,
+    <code>valueAsNumber</code>, decimals, empty fields and <code>name</code>/<code>form</code> association are all
+    unchanged.</p>
+    <p>Splice indices are the character nearest the center of the field, so they move with font metrics and widget
+    widths — the verdicts do not.</p>
+  </footer>
+</div>

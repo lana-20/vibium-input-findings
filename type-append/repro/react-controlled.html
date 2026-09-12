@@ -1,0 +1,24 @@
+<!doctype html><meta charset=utf-8><title>React controlled inputs</title>
+<!-- Loads React from a CDN so this fixture runs anywhere. The styling is
+     load-bearing: the splice index is the character nearest the center of the
+     box, so font and width decide the exact result. -->
+<style>input{display:block;margin:4px;font:16px monospace;width:100px}</style>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<pre id="state">-</pre>
+<script>
+const e = React.createElement;
+function App() {
+  const [n, setN] = React.useState('1234567890');
+  const [m, setM] = React.useState('abcdefghij');
+  const [t, setT] = React.useState('1234567890');
+  React.useEffect(() => { document.getElementById('state').textContent = JSON.stringify({n, m, t}); });
+  return e('div', null,
+    e('input', {id: 'rnum',  type: 'number', value: n, onChange: ev => setN(ev.target.value)}),
+    e('input', {id: 'rmail', type: 'email',  value: m, onChange: ev => setM(ev.target.value)}),
+    e('input', {id: 'rtext', type: 'text',   value: t, onChange: ev => setT(ev.target.value)}));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+window.__state = () => document.getElementById('state').textContent;
+</script>

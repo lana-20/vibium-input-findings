@@ -1,0 +1,16 @@
+p|chrome|range.step|55|60|0
+p|chrome|range.inrange|60|60|0
+p|chrome|range.clamp.high|150|100|0
+p|chrome|dtl.space|2020-01-02 10:30|2020-01-02T10:30|0
+p|chrome|dtl.T|2020-01-02T10:30|2020-01-02T10:30|0
+p|chrome|dtl.seconds|2020-01-02T10:30:00|2020-01-02T10:30|0
+p|chrome|time.seconds|10:30:45|10:30:45|0
+p|chrome|time.zeroes|10:30:00|10:30:00|0
+p|chrome|number.plus|+5||1
+p|chrome|number.leaddot|.5|.5|0
+p|chrome|number.trailzero|5.00|5.00|0
+p|chrome|number.step|55|55|0
+p|chrome|color.upper|#ABCDEF|#abcdef|0
+p|chrome|color.short|#abc|#aabbcc|0
+p|chrome|date.min|2019-05-05|2019-05-05|0
+p|chrome|week.noPad|2020-W2||1

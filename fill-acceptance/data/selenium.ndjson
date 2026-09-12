@@ -1,0 +1,17 @@
+{"tool":"selenium","op":"type","type":"text","value":"123456789099","err":""}
+{"tool":"selenium","op":"type","type":"password","value":"123456789099","err":""}
+{"tool":"selenium","op":"type","type":"number","value":"991234567890","err":""}
+{"tool":"selenium","op":"type","type":"email","value":"99abcdefghij","err":""}
+{"tool":"selenium","op":"type","type":"date","value":"2020-09-09","err":""}
+{"tool":"selenium","op":"type","type":"time","value":"09:09","err":""}
+{"tool":"selenium","op":"type","type":"month","value":"2020-09","err":""}
+{"tool":"selenium","op":"type","type":"week","value":"0009-W09","err":""}
+{"tool":"selenium","op":"type","type":"datetime-local","value":"2020-09-09T10:30","err":""}
+{"tool":"selenium","op":"fill","type":"number","sent":"abc","value":"","err":""}
+{"tool":"selenium","op":"fill","type":"date","sent":"not-a-date","value":"","err":""}
+{"tool":"selenium","op":"fill","type":"time","sent":"99","value":"","err":""}
+{"tool":"selenium","op":"fill","type":"month","sent":"2020-13","value":"","err":""}
+{"tool":"selenium","op":"fill","type":"week","sent":"2020-W99","value":"2099-W20","err":""}
+{"tool":"selenium","op":"fill","type":"datetime-local","sent":"junk","value":"","err":""}
+{"tool":"selenium","op":"fill","type":"color","sent":"notacolor","value":"#000000","err":""}
+{"tool":"selenium","op":"fill","type":"range","sent":"abc","value":"50","err":""}

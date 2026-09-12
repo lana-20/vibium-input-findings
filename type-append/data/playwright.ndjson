@@ -1,0 +1,17 @@
+{"tool":"playwright","op":"type","type":"text","value":"991234567890","err":""}
+{"tool":"playwright","op":"type","type":"password","value":"991234567890","err":""}
+{"tool":"playwright","op":"type","type":"number","value":"991234567890","err":""}
+{"tool":"playwright","op":"type","type":"email","value":"99abcdefghij","err":""}
+{"tool":"playwright","op":"type","type":"date","value":"2020-09-09","err":""}
+{"tool":"playwright","op":"type","type":"time","value":"09:09","err":""}
+{"tool":"playwright","op":"type","type":"month","value":"2020-09","err":""}
+{"tool":"playwright","op":"type","type":"week","value":"0009-W09","err":""}
+{"tool":"playwright","op":"type","type":"datetime-local","value":"2020-09-09T10:30","err":""}
+{"tool":"playwright","op":"fill","type":"number","sent":"abc","value":"","err":"Cannot type text into input[type=number]"}
+{"tool":"playwright","op":"fill","type":"date","sent":"not-a-date","value":"","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"time","sent":"99","value":"","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"month","sent":"2020-13","value":"","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"week","sent":"2020-W99","value":"","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"datetime-local","sent":"junk","value":"","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"color","sent":"notacolor","value":"#000000","err":"Malformed value"}
+{"tool":"playwright","op":"fill","type":"range","sent":"abc","value":"50","err":"Malformed value"}

@@ -1,0 +1,135 @@
+diff --git a/clicker/internal/api/handlers_interaction.go b/clicker/internal/api/handlers_interaction.go
+index bb7419f..2b74d36 100644
+--- a/clicker/internal/api/handlers_interaction.go
++++ b/clicker/internal/api/handlers_interaction.go
+@@ -1184,6 +1184,50 @@ func buildSetValueScript(ep ElementParams, value string) (string, []map[string]i
+ 			} else {
+ 				el.value = value;
+ 			}
++			// Check the write took before reporting success. Assigning through
++			// the value IDL attribute runs the type's value sanitization
++			// algorithm, which can discard a string outright while the
++			// assignment itself throws nothing: the field is left empty
++			// (number, and the date family) or moved to a substitute (color,
++			// range). Without this check fill answers "ok" for a value the field
++			// never took, and the caller goes on to submit an empty form.
++			//
++			// What is NOT checked is equally deliberate. Comparing the value
++			// back byte-for-byte would fail on ordinary, spec-mandated
++			// normalization and report a healthy write as an error: a range
++			// snaps to its step (55 -> 60) and clamps to its bounds, a
++			// datetime-local folds "2020-01-02 10:30" to the T form and drops a
++			// trailing ":00", a color expands "#abc" to "#aabbcc", and the
++			// text-like types strip line breaks or trim. Every one of those was
++			// stored. So each family is asked the question it can actually
++			// answer.
++			//
++			// An empty value is exempt throughout: it is what clear writes
++			// through this same builder, and #187 established that fill "" means
++			// "clear the field".
++			if (value !== '' && el instanceof window.HTMLInputElement) {
++				const t = el.type;
++				let rejected = false;
++				if (['number', 'date', 'time', 'month', 'week', 'datetime-local'].indexOf(t) !== -1) {
++					// These can hold the empty string, so a wholesale rejection
++					// is visible directly: the field is empty after a non-empty
++					// write.
++					rejected = el.value === '';
++				} else if (t === 'range') {
++					// A range always holds some number, so emptiness cannot be
++					// the signal. Snapping and clamping are sanitization; a value
++					// that is not a number at all is a rejection.
++					rejected = isNaN(Number(String(value).trim()));
++				} else if (t === 'color') {
++					// Likewise a color always holds some color. Accepts
++					// #rgb and #rrggbb; anything else lands on #000000.
++					rejected = !/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(String(value).trim());
++				}
++				if (rejected) {
++					return 'input[type=' + t + '] did not accept "' + value +
++						'"; the field holds "' + el.value + '"';
++				}
++			}
+ 			el.dispatchEvent(new Event('input', { bubbles: true }));
+ 			el.dispatchEvent(new Event('change', { bubbles: true }));
+ 			return 'ok';
+diff --git a/tests/cli/engine/input-tools.test.js b/tests/cli/engine/input-tools.test.js
+index bb41963..b0989b6 100644
+--- a/tests/cli/engine/input-tools.test.js
++++ b/tests/cli/engine/input-tools.test.js
+@@ -179,4 +179,75 @@ describe('CLI: fill edge cases', () => {
+     });
+     assert.strictEqual(value.trim(), '', 'field should be cleared');
+   });
++
++  test('fill fails when the field cannot hold the value', () => {
++    execSync(`${VIBIUM} content '<input id="n" type="number" value="">'`, {
++      encoding: 'utf-8',
++      timeout: 30000,
++    });
++    let status = 0;
++    let output = '';
++    try {
++      output = execSync(`${VIBIUM} fill "#n" "abc" 2>&1`, { encoding: 'utf-8', timeout: 30000 });
++    } catch (e) {
++      status = e.status;
++      output = e.stdout || '';
++    }
++    assert.notStrictEqual(status, 0, 'fill should exit non-zero, not report success');
++    assert.match(output, /did not accept/, 'the error should name the rejected value');
++    const value = execSync(`${VIBIUM} eval 'document.getElementById("n").value'`, {
++      encoding: 'utf-8',
++      timeout: 30000,
++    });
++    assert.strictEqual(value.trim(), '', 'the rejected write leaves the field empty');
++  });
++
++  test('fill still succeeds when the control normalizes a value it accepted', () => {
++    // Every one of these is stored, just not byte-for-byte as sent: a range
++    // snaps to its step and clamps to its bounds, a datetime-local folds the
++    // space form and drops a trailing ":00", a color expands #abc. Comparing
++    // the value back literally would report all of them as failures.
++    execSync(`${VIBIUM} content '<input id="r" type="range" min="0" max="100" step="10" value="0">`
++      + `<input id="d" type="datetime-local" value=""><input id="c" type="color" value="%23111111">'`, {
++      encoding: 'utf-8',
++      timeout: 30000,
++    });
++    for (const [sel, value, expected] of [
++      ['#r', '55', '60'],
++      ['#r', '150', '100'],
++      ['#d', '2020-01-02 10:30', '2020-01-02T10:30'],
++      ['#d', '2020-01-02T10:30:00', '2020-01-02T10:30'],
++      ['#c', '#abc', '#aabbcc'],
++    ]) {
++      assert.match(
++        execSync(`${VIBIUM} fill "${sel}" "${value}"`, { encoding: 'utf-8', timeout: 30000 }),
++        /Filled/,
++        `${value} is accepted and normalized, not rejected`,
++      );
++      const got = execSync(`${VIBIUM} eval 'document.querySelector("${sel}").value'`, {
++        encoding: 'utf-8',
++        timeout: 30000,
++      }).trim();
++      assert.strictEqual(got, expected, `${sel} should hold ${expected}`);
++    }
++  });
++
++  test('fill still succeeds when the field only normalizes the value', () => {
++    // A single-line input strips line breaks and a color input lowercases its
++    // hex; both are value sanitization, not a rejection, and must not error.
++    execSync(`${VIBIUM} content '<input id="t" value=""><input id="c" type="color" value="%23aabbcc">'`, {
++      encoding: 'utf-8',
++      timeout: 30000,
++    });
++    assert.match(
++      execSync(`${VIBIUM} fill "#t" "a\nb"`, { encoding: 'utf-8', timeout: 30000 }),
++      /Filled/,
++      'a stripped line break is not a rejection',
++    );
++    assert.match(
++      execSync(`${VIBIUM} fill "#c" "#00FF00"`, { encoding: 'utf-8', timeout: 30000 }),
++      /Filled/,
++      'lowercasing a color is not a rejection',
++    );
++  });
+ });

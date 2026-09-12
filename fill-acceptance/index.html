@@ -1,0 +1,397 @@
+<title>Fill Acceptance Measurements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap">
+<style>
+  :root {
+    --ground: #f6f7f9;
+    --panel: #ffffff;
+    --panel-alt: #f0f2f6;
+    --ink: #151a21;
+    --ink-soft: #4d5866;
+    --ink-faint: #78838f;
+    --rule: #dde2e9;
+    --rule-strong: #c3ccd6;
+    --accent: #2b6b7a;
+    --accent-soft: #e3eff1;
+    --fault: #9a4b16;
+    --fault-soft: #f7e9de;
+    --good: #1f6a47;
+    --good-soft: #e0efe7;
+    --neutral: #46577a;
+    --neutral-soft: #e6eaf3;
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  :root:not([data-theme="light"]) {
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #0f1319;
+      --panel: #161c24;
+      --panel-alt: #1c232d;
+      --ink: #e6ebf1;
+      --ink-soft: #a3afbd;
+      --ink-faint: #7b8794;
+      --rule: #27303b;
+      --rule-strong: #3a4553;
+      --accent: #6fb3c2;
+      --accent-soft: #14303a;
+      --fault: #e0a06a;
+      --fault-soft: #33241a;
+      --good: #71c69c;
+      --good-soft: #14291f;
+      --neutral: #9db0d8;
+      --neutral-soft: #1c2333;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #0f1319;
+    --panel: #161c24;
+    --panel-alt: #1c232d;
+    --ink: #e6ebf1;
+    --ink-soft: #a3afbd;
+    --ink-faint: #7b8794;
+    --rule: #27303b;
+    --rule-strong: #3a4553;
+    --accent: #6fb3c2;
+    --accent-soft: #14303a;
+    --fault: #e0a06a;
+    --fault-soft: #33241a;
+    --good: #71c69c;
+    --good-soft: #14291f;
+    --neutral: #9db0d8;
+    --neutral-soft: #1c2333;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 48px 72px;
+  }
+
+  header.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: 14px 0 0;
+  }
+
+  .thesis {
+    margin: 14px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 72ch;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+  }
+  .env {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 28px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .env div { padding-block: 3px; }
+  .env b { color: var(--ink-soft); font-weight: 500; }
+
+  section.issue { margin-top: 56px; }
+  .issue-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  h2 code { font-family: var(--mono); font-size: 0.94em; font-weight: 600; }
+  .issue-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+  .issue-note {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    max-width: 70ch;
+    margin: 10px 0 0;
+  }
+
+  .scroller {
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--panel);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 880px; }
+  caption { text-align: left; padding: 12px 14px; font-size: 12.5px; color: var(--ink-faint); border-bottom: 1px solid var(--rule); }
+  th, td { text-align: left; padding: 9px 14px; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  thead th {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    background: var(--panel-alt);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+  thead th.ours { color: var(--accent); }
+  .th-eng { font-weight: 400; letter-spacing: 0.04em; opacity: 0.7; text-transform: none; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.control td { background: var(--panel-alt); }
+  td.k { font-family: var(--mono); font-weight: 500; white-space: nowrap; }
+  td.k .seed { display: block; font-weight: 400; font-size: 11.5px; color: var(--ink-faint); }
+  .val {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+  }
+  .engine {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  .chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+  .c-good { background: var(--good-soft); color: var(--good); }
+  .c-fault { background: var(--fault-soft); color: var(--fault); }
+  .c-neutral { background: var(--neutral-soft); color: var(--neutral); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .legend span.chip { margin: 0 6px 0 0; }
+  .legend-note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 78ch;
+    border-left: 2px solid var(--rule-strong);
+    padding-left: 12px;
+  }
+  .legend-note .chip { margin: 0 2px; }
+
+  .reading { margin-top: 22px; display: grid; gap: 14px; }
+  .reading p { margin: 0; max-width: 72ch; }
+  .reading b { font-weight: 600; }
+  .reading code, p code, li code { font-family: var(--mono); font-size: 0.9em; background: var(--panel-alt); padding: 1px 4px; border-radius: 3px; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-faint);
+    max-width: 72ch;
+  }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 560px) {
+    .wrap { padding-block: 32px 52px; }
+  }
+</style>
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Measured evidence · companion to the report</p>
+    <h1>Fill Acceptance Measurements</h1>
+    <p class="lede"><code>vibium fill</code> reports success for a value the field cannot hold. The write goes through
+    the native value setter, which throws nothing — so the only question is whether the tool notices the value did not
+    stick. Every value on this page was read back from a live field, not inferred from source.</p>
+    <div class="env">
+      <div><b>upstream</b> dd48732 · also reproduced at e63bb73</div>
+      <div><b>chrome</b> 152.0.7977.54</div>
+      <div><b>firefox</b> 155.0</div>
+      <div><b>playwright</b> 1.63.0</div>
+      <div><b>selenium</b> 4.49.0 (BiDi on)</div>
+    </div>
+  </header>
+
+  <section class="issue">
+    <p class="issue-note">Each field starts empty and is given a value its type's sanitization algorithm discards.
+    Vibium ran on Chrome and Firefox; Playwright and Selenium on Chrome only, driving the same Chrome binary, because
+    Playwright cannot launch a stock Firefox — it needs its own patched build.</p>
+
+    <div class="scroller">
+      <table>
+        <caption>Field contents and outcome after writing an invalid value. Four result columns, three tools: Vibium appears twice, stock and patched. Every chip is the
+        <b>Chrome</b> verdict; where Firefox differs it is named in the line beneath.</caption>
+        <thead>
+          <tr>
+            <th>input type</th>
+            <th>value sent</th>
+            <th class="ours">Vibium stock</th>
+            <th class="ours">Vibium + patch</th>
+            <th>Playwright <span class="th-eng">chrome</span></th>
+            <th>Selenium <span class="th-eng">chrome</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="k">number</td><td class="val">abc</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Cannot type text into input[type=number]</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, field empty</div></td>
+          </tr>
+          <tr>
+            <td class="k">date</td><td class="val">not-a-date</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, field empty</div></td>
+          </tr>
+          <tr>
+            <td class="k">time</td><td class="val">99</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, field empty</div></td>
+          </tr>
+          <tr>
+            <td class="k">month</td><td class="val">2020-13</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty<span class="engine">ff · kept, 2020-13</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1<span class="engine">ff · accepted as text</span></div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, field empty</div></td>
+          </tr>
+          <tr>
+            <td class="k">week</td><td class="val">2020-W99</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty<span class="engine">ff · kept, 2020-W99</span></div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1<span class="engine">ff · accepted as text</span></div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, wrote 2099-W20</div></td>
+          </tr>
+          <tr>
+            <td class="k">datetime-local</td><td class="val">junk</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, field empty</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, field empty</div></td>
+          </tr>
+          <tr>
+            <td class="k">color</td><td class="val">notacolor</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, became #000000</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, became #000000</div></td>
+          </tr>
+          <tr>
+            <td class="k">range</td><td class="val">abc</td>
+            <td><span class="chip c-fault">silent</span><div class="val">exit 0, became 50</div></td>
+            <td><span class="chip c-good">refused</span><div class="val">exit 1</div></td>
+            <td><span class="chip c-good">throws</span><div class="val">Malformed value</div></td>
+            <td><span class="chip c-fault">silent</span><div class="val">no exception, became 50</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <div><span class="chip c-fault">silent</span>write discarded, caller told nothing</div>
+      <div><span class="chip c-good">refused</span>reported as a failure</div>
+      <div><span class="chip c-good">throws</span>raises an exception</div>
+    </div>
+    <p class="legend-note"><span class="chip c-fault">silent</span> covers two outcomes, and the second is the quieter
+    one: the field is either left <b>empty</b> (<code>number</code>, the date family) or moved to a <b>substitute</b>
+    the browser picked — <code>notacolor</code> becomes <code>#000000</code>, <code>abc</code> on a slider becomes
+    <code>50</code>. An empty required field usually surfaces at submit; a plausible substitute does not surface at all.</p>
+
+    <div class="reading">
+      <p><b>The check cannot be a literal round trip, and that is the whole design.</b> Comparing the value back
+      byte-for-byte reports healthy writes as failures: a <code>range</code> snaps to its <code>step</code>
+      (<code>55</code> → <code>60</code>) and clamps to its bounds (<code>150</code> → <code>100</code>); a
+      <code>datetime-local</code> folds <code>2020-01-02 10:30</code> to the <code>T</code> form and drops a trailing
+      <code>:00</code>; a <code>color</code> expands <code>#abc</code> to <code>#aabbcc</code>. All five were stored. So
+      each family is asked what it can answer: <code>number</code> and the five date types can hold the empty string, so
+      a rejection shows directly as an empty field after a non-empty write; <code>range</code> and <code>color</code>
+      always hold something, so they are asked whether the value was a number, or a <code>#rgb</code>/<code>#rrggbb</code>
+      color, at all.</p>
+      <p><b>Normalization is deliberately not an error.</b> Stripping a line break from a text input, trimming an email,
+      folding CRLF in a textarea and lowercasing <code>#00FF00</code> all still succeed. So does <code>fill ""</code>,
+      which clears the field — behavior issue #187 established, and the same builder serves <code>clear</code>.</p>
+      <p><b>Not validating is the majority behavior.</b> Playwright is the outlier that gets it right; Selenium is as
+      silent as vibium. So the argument for closing this gap is the spec plus the empty field, not that everyone else
+      already does it.</p>
+      <p><b>Selenium has no <code>fill</code></b>, so the comparison is <code>sendKeys</code>, and the two are not the
+      same operation. For <code>date</code> it is a fair test — the browser renders it as something other than a text
+      input, so Element Send Keys takes the branch that is supposed to report bad input, and does not. For
+      <code>number</code> the keys are simply typed and the browser drops the non-numeric ones
+      (<code>sendKeys("1a2")</code> yields <code>"12"</code>). The <code>week</code> cell shows the difference plainly:
+      the digits landed in segments and produced a <em>valid</em> week, <code>2099-W20</code>, rather than nothing.</p>
+      <p><b>Measured on all five Vibium surfaces</b> — CLI, MCP, and the JavaScript, Python and Java clients — across
+      both engines and both builds. Sixty runs, and all five agree in every combination. Each client raises its own
+      type: <code>Error</code>, <code>BiDiError</code>, <code>VibiumException</code>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Why the field can reject a value with nothing in the codebase noticing:
+    <code>FillableInputTypesJS</code> (<code>actionability.go:179</code>) is the one place Vibium models input types,
+    and it answers a single question — may <code>fill</code> set this value. <code>color</code> and <code>range</code>
+    sit in that list yet silently substitute. The same one-boolean model is why <code>type</code> has a matching defect
+    of its own.</p>
+    <p>Patch: 2 files, +115; applies clean at <code>dd48732</code> and at <code>e63bb73</code>, and carries a regression
+    test for each normalization case above.</p>
+  </footer>
+</div>

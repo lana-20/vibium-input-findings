@@ -1,0 +1,60 @@
+cli|number-abc|||stock|chrome
+cli|date-bad|||stock|chrome
+cli|number-42|42||stock|chrome
+mcp|number-abc|||stock|chrome
+mcp|date-bad|||stock|chrome
+mcp|number-42|42||stock|chrome
+js|number-abc|||stock|chrome
+js|date-bad|||stock|chrome
+js|number-42|42||stock|chrome
+python|number-abc|||stock|chrome
+python|date-bad|||stock|chrome
+python|number-42|42||stock|chrome
+java|number-abc|||stock|chrome
+java|date-bad|||stock|chrome
+java|number-42|42||stock|chrome
+cli|number-abc|||stock|firefox
+cli|date-bad|||stock|firefox
+cli|number-42|42||stock|firefox
+mcp|number-abc|||stock|firefox
+mcp|date-bad|||stock|firefox
+mcp|number-42|42||stock|firefox
+js|number-abc|||stock|firefox
+js|date-bad|||stock|firefox
+js|number-42|42||stock|firefox
+python|number-abc|||stock|firefox
+python|date-bad|||stock|firefox
+python|number-42|42||stock|firefox
+java|number-abc|||stock|firefox
+java|date-bad|||stock|firefox
+java|number-42|42||stock|firefox
+cli|number-abc||Error: failed to fill: fill: input[type=number] did not accept "abc"; the field holds ""|patched|chrome
+cli|date-bad||Error: failed to fill: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|chrome
+cli|number-42|42||patched|chrome
+mcp|number-abc||failed to fill: fill: input[type=number] did not accept "abc"; the field holds ""|patched|chrome
+mcp|date-bad||failed to fill: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|chrome
+mcp|number-42|42||patched|chrome
+js|number-abc||Error: error: fill: input[type=number] did not accept "abc"; the field holds ""|patched|chrome
+js|date-bad||Error: error: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|chrome
+js|number-42|42||patched|chrome
+python|number-abc||BiDiError: error: fill: input[type=number] did not accept "abc"; the field holds ""|patched|chrome
+python|date-bad||BiDiError: error: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|chrome
+python|number-42|42||patched|chrome
+java|number-abc||VibiumException: fill: input[type=number] did not accept "abc"; the field holds ""|patched|chrome
+java|date-bad||VibiumException: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|chrome
+java|number-42|42||patched|chrome
+cli|number-abc||Error: failed to fill: fill: input[type=number] did not accept "abc"; the field holds ""|patched|firefox
+cli|date-bad||Error: failed to fill: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|firefox
+cli|number-42|42||patched|firefox
+mcp|number-abc||failed to fill: fill: input[type=number] did not accept "abc"; the field holds ""|patched|firefox
+mcp|date-bad||failed to fill: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|firefox
+mcp|number-42|42||patched|firefox
+js|number-abc||Error: error: fill: input[type=number] did not accept "abc"; the field holds ""|patched|firefox
+js|date-bad||Error: error: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|firefox
+js|number-42|42||patched|firefox
+python|number-abc||BiDiError: error: fill: input[type=number] did not accept "abc"; the field holds ""|patched|firefox
+python|date-bad||BiDiError: error: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|firefox
+python|number-42|42||patched|firefox
+java|number-abc||VibiumException: fill: input[type=number] did not accept "abc"; the field holds ""|patched|firefox
+java|date-bad||VibiumException: fill: input[type=date] did not accept "not-a-date"; the field holds ""|patched|firefox
+java|number-42|42||patched|firefox
