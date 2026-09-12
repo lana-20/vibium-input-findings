@@ -8,7 +8,7 @@ the caret mid-value and the text is spliced into the middle. On `date`, `time`,
 keystroke overwrites a segment instead. Seven types on Chrome; five on Firefox,
 which renders `month` and `week` as ordinary text inputs.
 
-`ISSUE.md` is the report. The same results are rendered as **[a single page](./)**,
+`ISSUE.md` is the report. The same results are rendered as **[a single page](https://lana-20.github.io/vibium-input-findings/type-append/)**,
 which needs no server and fetches nothing but a webfont.
 
 ## See it in ten seconds

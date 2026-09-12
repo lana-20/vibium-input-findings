@@ -8,8 +8,8 @@ back from a live field, not inferred from source.
 
 | | |
 |---|---|
-| [`type-append/`](type-append/) | `type` breaks its documented append contract on seven input types — spliced mid-value on `number` and `email`, a segment overwritten on the five date types |
-| [`fill-acceptance/`](fill-acceptance/) | `fill` reports success for a value the field cannot hold — exits 0 and leaves the field empty, or on a substitute the browser picked |
+| **[type-append](https://lana-20.github.io/vibium-input-findings/type-append/)** | `type` breaks its documented append contract on seven input types — spliced mid-value on `number` and `email`, a segment overwritten on the five date types |
+| **[fill-acceptance](https://lana-20.github.io/vibium-input-findings/fill-acceptance/)** | `fill` reports success for a value the field cannot hold — exits 0 and leaves the field empty, or on a substitute the browser picked |
 
 Each directory holds the report (`ISSUE.md`), the patch, every script needed to
 re-derive its tables, and the raw output those scripts produced. Start with its

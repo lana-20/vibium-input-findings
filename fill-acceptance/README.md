@@ -5,7 +5,7 @@ without reading anything back. Assigning through that setter runs the type's val
 sanitization algorithm, which can discard the string outright while throwing
 nothing — so the command reports success for a value the field never took.
 
-`ISSUE.md` is the report. The same results are rendered as **[a single page](./)**,
+`ISSUE.md` is the report. The same results are rendered as **[a single page](https://lana-20.github.io/vibium-input-findings/fill-acceptance/)**,
 which needs no server and fetches nothing but a webfont.
 
 ## See it in five seconds
